@@ -10,28 +10,29 @@ switch (index) {
         break;
     case 1:
         console.log("--MODIFY AN EXISTING TASK--");
+        await showTaskController();
         let modifiedTask = modifyTaskInteractor();
-        modifyTaskController(modifiedTask);
+        await modifyTaskController(modifiedTask);
         break;
 
     case 2:
         console.log("--SHOW ALL TASKS--");
-        showTaskController();
+        await showTaskController();
         break;
     case 3:
         console.log("--SHOW ONLY ONE TASK--");
         const idToSearch = taskIdInteractor("search");
-        showTaskController(idToSearch);
+        await showTaskController(idToSearch);
         break;
     case 4:
         console.log("--MARK TASK AS COMPLETED--");
         const idToComplete = taskIdInteractor("mark as completed or in process")
-        completeTaskController(idToComplete);
+        await completeTaskController(idToComplete);
         break;
     case 5:
         console.log("--DELETE A TASK--");
         const idToDel = taskIdInteractor("delete")
-        deleteTaskController(idToDel);
+        await deleteTaskController(idToDel);
         break;
     default:
         break;
