@@ -18,17 +18,17 @@ export const addTaskInteractor = () => {
     return task;
 }
 
+export const taskIdInteractor = (method) => {
+    const id = parseInt(readLineSync.question("Please enter the task id you want to " + method + ": "));
+    return id;
+}
+
 export const modifyTaskInteractor = () => {
-    const idToModify = readLineSync.question("Please enter the task id you want to modify: ");
+    const idToModify = taskIdInteractor("modify");
     const descriptionModified = readLineSync.question("Please enter a new description for the existing task: ");
     const completed = readLineSync.keyInYNStrict("Mark as completed? ");
     const deletable = readLineSync.keyInYNStrict("Is your task currently deletable? ");
     const taskModified = new TaskModel(parseInt(idToModify), descriptionModified, { complete: completed, deletable });
 
     return taskModified;
-}
-
-export const taskIdInteractor = (method) => {
-    const id = parseInt(readLineSync.question("Please enter the task id you want to " + method + ": "));
-    return id;
 }
