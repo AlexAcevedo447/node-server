@@ -1,8 +1,6 @@
 import readLineSync from "readline-sync";
 
-import { TaskModel, addTask, completeTask, deleteTask, initializeTaskList, modifyTask, showTasks } from "./task_model.mjs";
-
-initializeTaskList();
+import { TaskModel, addTask, completeTask, deleteTask, modifyTask, showTasks } from "./task_model.mjs";
 
 // /**
 //  * 

@@ -19,7 +19,7 @@ export class TaskModel {
  */
 export const tasklist = [];
 
-export const initializeTaskList = () => {
+const initializeTaskList = () => {
     const t1 = new TaskModel(0, "this is an awesome content", { complete: false, deletable: false })
     const t2 = new TaskModel(1, "this is my second try", { complete: true, deletable: true })
     const t3 = new TaskModel(2, "this is really exciting", { complete: false, deletable: true })
@@ -32,7 +32,7 @@ export const initializeTaskList = () => {
         tasklist.push(t3)
     }
 }
-
+initializeTaskList()
 /**
  * returns 1 if done, returns 0 if something was wrong
  * @param {TaskModel} task 
