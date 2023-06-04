@@ -36,75 +36,74 @@ initializeTaskList()
 /**
  * returns 1 if done, returns 0 if something was wrong
  * @param {TaskModel} task 
- * @returns {Promise<number>}
+ * @returns {boolean}
  */
 export const addTask = (task) => {
     try {
         tasklist.push(task);
-        return Promise.resolve(1);
+        return true;
     } catch {
-        return Promise.reject(0);
+        return false;
     }
 }
 
 /**
  * returns 1 if done, returns 0 if something was wrong
  * @param {TaskModel} modification 
- * @returns {Promise<number>}
+ * @returns {boolean}
  */
 export const modifyTask = (modification) => {
-    const found = tasklist.filter(task => task.id === modification.id)[0];
+    const id = parseInt(modification.id);
+    const found = tasklist.filter(task => task.id === id)[0];
     try {
         found.description = modification.description;
         found.state = modification.state;
-        return Promise.resolve(1);
+        return true;
     } catch (error) {
         console.log(error);
-        return Promise.reject(0);
+        return false;
     }
 }
 
 /**
  * returns 1 if done, returns 0 if something was wrong
  * @param {number} id 
- * @returns {Promise<number>}
+ * @returns {boolean}
  */
 export const deleteTask = (id) => {
-    const found = tasklist.filter(task => task.id === id)[0];
+    const found = tasklist.filter(task => task.id !== id)[0];
     if (found) {
         tasklist.splice(id, 1);
-        return Promise.resolve(1);
+        return true;
     } else {
-        return Promise.reject(0);
+        return false;
     }
 }
 
 /**
  * returns 1 if done, returns 0 if something was wrong
  * @param {number} id 
- * @returns {Promise<number>}
+ * @returns {boolean}
  */
-export const completeTask = (id) => {
+export const completeTask = (taskId) => {
+    let id = parseInt(taskId);
     const found = tasklist.filter(task => task.id === id)[0];
     try {
         found.state.complete = !found.state.complete;
-        return Promise.resolve(1);
-    } catch {
-        return Promise.reject(0);
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
     }
 }
 
 /**
  * returns 1 if done, returns 0 if something was wrong.
  * returns a list of tasks if id was not provided, returns only one otherwise
- * @param {number} id - optional param to show only one by id
+ * @param {(task:TaskModel)=>boolean|TaskModel} callback - optional param to show only one by id
  * @returns {Promise<TaskModel[]|TaskModel>}
  */
-export const showTasks = (id) => {
-    if (id !== undefined) {
-        const foundOne = tasklist.filter(task => task.id === id)[0];
-        return Promise.resolve(foundOne);
-    } else {
-        return Promise.resolve(tasklist);
-    }
+export const showTasks = (callback) => {
+    const found = tasklist.filter(callback);
+    return found;
 }
