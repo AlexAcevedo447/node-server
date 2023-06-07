@@ -85,7 +85,7 @@ export const filterTasksController = (request, response) => {
                 resp = showTasks((task) => task.id == value);
                 break;
             case "completed":
-                const comp = value.toLowerCase() == "true" ? true : false;
+                const comp = value.toLowerCase() === "true";
                 resp = showTasks((task) => task.state.complete === comp);
                 break;
             default:
