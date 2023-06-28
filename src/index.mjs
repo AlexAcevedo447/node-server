@@ -1,6 +1,7 @@
 import express from "express";
 import getRouter from "./routes/list-view.router.mjs";
 import editRouter from "./routes/list-edit.router.mjs";
+import authRouter from "./routes/auth.router.mjs"
 import { notAllowedMethod, notFoundMiddleware } from "./middlewares/app.middleware.mjs";
 const app = express();
 const port = 3200;
@@ -8,6 +9,7 @@ const port = 3200;
 //Middlewares
 app.use(express.json());
 
+app.use("/login", authRouter);
 app.use("/tasks", [getRouter, editRouter]);
 
 app.use(notAllowedMethod)

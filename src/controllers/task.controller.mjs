@@ -1,6 +1,6 @@
 import express from "express";
 
-import { TaskModel, addTask, completeTask, deleteTask, modifyTask, showTasks, tasklist } from "./task_model.mjs";
+import { TaskModel, addTask, completeTask, deleteTask, modifyTask, showTasks, tasklist } from "../task_model.mjs";
 
 /**
  *
